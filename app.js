@@ -46,18 +46,19 @@
 
   function paintSteps() {
     if (!stepsBox || !fill || !steps.length) return;
+    // сначала все замеры, потом все изменения: иначе браузер
+    // пересчитывает раскладку по нескольку раз за кадр
     var anchor = window.innerHeight * 0.55;
     var box = stepsBox.getBoundingClientRect();
-    var last = steps[steps.length - 1].getBoundingClientRect();
+    var rects = steps.map(function (s) { return s.getBoundingClientRect(); });
+    var last = rects[rects.length - 1];
     var total = (last.top + last.height * 0.5) - (box.top + 14);
-    var passed = anchor - (box.top + 14);
-    var h = Math.max(0, Math.min(passed, total));
-    fill.style.height = h + 'px';
+    var h = Math.max(0, Math.min(anchor - (box.top + 14), total));
 
-    steps.forEach(function (s) {
-      var r = s.getBoundingClientRect();
-      s.classList.toggle('on', r.top < anchor + 40);
-    });
+    fill.style.height = h + 'px';
+    for (var i = 0; i < steps.length; i++) {
+      steps[i].classList.toggle('on', rects[i].top < anchor + 40);
+    }
   }
 
   /* ---------- появление блоков при прокрутке ---------- */

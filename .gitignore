@@ -1,2 +1,5 @@
 dist/
 *.zip
+build/
+fonts_full_backup/
+docs/
