@@ -404,3 +404,14 @@ section[id],#top{scroll-margin-top:96px}
 }
 .btn-txt{display:inline-flex;align-items:center;gap:9px}
 .btn-txt svg{width:14px;height:14px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* на узких экранах подпись в шапке переносилась на две строки
+   и раздувала её — оставляем только имя */
+@media(max-width:560px){
+  .brand .bs{display:none}
+  .brand .bn{font-size:13px;letter-spacing:.05em}
+  .brand{gap:11px}
+  .mono{width:34px;height:34px;font-size:13px}
+  .hdr{padding:16px var(--gutter)}
+  .hdr.stuck{padding:11px var(--gutter)}
+}
