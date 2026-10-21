@@ -179,6 +179,34 @@
     });
   }
 
+  /* ---------- кнопка звонка на телефоне ---------- */
+  // видна, когда обложка с её собственной кнопкой звонка уже позади,
+  // и прячется, пока на экране форма записи или подвал с контактами
+  var callbar = document.getElementById('callbar');
+  var heroCta = document.querySelector('.hero-actions');
+  if (callbar && heroCta && 'IntersectionObserver' in window) {
+    var pastHero = false;
+    var contactsInView = {};
+    var syncCallbar = function () {
+      var nearContacts = Object.keys(contactsInView).some(function (k) { return contactsInView[k]; });
+      callbar.classList.toggle('on', pastHero && !nearContacts);
+    };
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        pastHero = !e.isIntersecting && e.boundingClientRect.top < 0;
+      });
+      syncCallbar();
+    }).observe(heroCta);
+    var contactsIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { contactsInView[e.target.tagName + e.target.id] = e.isIntersecting; });
+      syncCallbar();
+    });
+    ['#book', 'footer'].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (el) contactsIo.observe(el);
+    });
+  }
+
   /* ---------- форма записи ---------- */
   var form = document.getElementById('bookForm');
   if (!form) return;
