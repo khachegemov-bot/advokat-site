@@ -25,17 +25,23 @@
   var ticking = false;
 
   function onScroll() {
+    // сначала все замеры, потом все изменения: иначе браузер
+    // пересчитывает вёрстку по нескольку раз за один кадр
     var y = window.pageYOffset || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var vh = window.innerHeight;
+    var h = document.documentElement.scrollHeight - vh;
+    var st = measureSteps(vh);
+    var mf = measureManifesto(vh);
 
     if (hdr) hdr.classList.toggle('stuck', y > 40);
-    if (bar) bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
-    if (!reduced && y < window.innerHeight * 1.4) {
-      if (glow) glow.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
+    // transform, а не width: полоска двигается без пересчёта вёрстки
+    if (bar) bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0).toFixed(4) + ')';
+    if (!reduced && y < vh * 1.4) {
+      if (glow) glow.style.transform = 'translate3d(0,' + (y * 0.18).toFixed(1) + 'px,0)';
       if (heroSeal) heroSeal.style.transform = 'translate3d(0,' + (y * 0.22).toFixed(1) + 'px,0)';
     }
-    paintSteps(y);
-    paintManifesto();
+    applySteps(st);
+    applyManifesto(mf);
     ticking = false;
   }
 
@@ -50,27 +56,32 @@
   var fill = document.getElementById('fill');
   var stepsBox = document.getElementById('steps');
 
-  function paintSteps() {
-    if (!stepsBox || !fill || !steps.length) return;
-    // сначала все замеры, потом все изменения: иначе браузер
-    // пересчитывает раскладку по нескольку раз за кадр
-    var anchor = window.innerHeight * 0.55;
+  function measureSteps(vh) {
+    if (!stepsBox || !fill || !steps.length) return null;
     var box = stepsBox.getBoundingClientRect();
+    if (box.bottom < -vh || box.top > vh * 2) return null; // далеко от экрана — не считаем
+    var anchor = vh * 0.55;
     var rects = steps.map(function (s) { return s.getBoundingClientRect(); });
     var last = rects[rects.length - 1];
+    var track = box.height - 28;
     var total = (last.top + last.height * 0.5) - (box.top + 14);
     var h = Math.max(0, Math.min(anchor - (box.top + 14), total));
+    return {
+      scale: track > 0 ? h / track : 0,
+      on: rects.map(function (r) { return r.top < anchor + 40; })
+    };
+  }
 
-    fill.style.height = h + 'px';
-    for (var i = 0; i < steps.length; i++) {
-      steps[i].classList.toggle('on', rects[i].top < anchor + 40);
-    }
+  function applySteps(st) {
+    if (!st) return;
+    // линия растягивается масштабом, а не высотой — без пересчёта вёрстки
+    fill.style.transform = 'scaleY(' + st.scale.toFixed(4) + ')';
+    for (var i = 0; i < steps.length; i++) steps[i].classList.toggle('on', st.on[i]);
   }
 
   /* ---------- манифест: слова загораются по мере чтения ---------- */
   var man = document.getElementById('manifesto');
   var mText = man && man.querySelector('.m-text');
-  var mStage = man && man.querySelector('.m-stage');
   var words = [];
   var litCount = -1;
 
@@ -98,15 +109,34 @@
     })(mText);
   }
 
-  function paintManifesto() {
-    if (!mStage || !words.length) return;
-    var r = mStage.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    var span = r.height - window.innerHeight;
-    var p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
-    man.style.setProperty('--draw', Math.min(1, p / 0.12).toFixed(3));
-    var t = Math.min(1, Math.max(0, (p - 0.1) / 0.72));
-    var n = Math.round(t * words.length);
+  // Текст больше не закрепляется на экране: раньше страница почти
+  // тысячу пикселей прокрутки стояла на месте и казалась зависшей.
+  // Теперь абзац едет вместе со страницей, а слова загораются, пока он
+  // проходит зону чтения — от 85% высоты экрана до 40%.
+  var lastDraw = -1;
+
+  function measureManifesto(vh) {
+    if (!mText || !words.length) return null;
+    var r = mText.getBoundingClientRect();
+    if (r.bottom < -vh * 0.5 || r.top > vh * 1.5) return null;
+    var start = vh * 0.85;
+    var end = vh * 0.4;
+    var p = (start - r.top) / ((start - end) + r.height);
+    // эмблема стоит примерно на 144 px выше абзаца и прорисовывается раньше
+    var draw = (vh * 0.95 - (r.top - 144)) / (vh * 0.3);
+    return {
+      p: Math.min(1, Math.max(0, p)),
+      draw: Math.min(1, Math.max(0, draw))
+    };
+  }
+
+  function applyManifesto(mf) {
+    if (!mf) return;
+    if (Math.abs(mf.draw - lastDraw) > 0.004) {
+      man.style.setProperty('--draw', mf.draw.toFixed(3));
+      lastDraw = mf.draw;
+    }
+    var n = Math.round(Math.min(1, Math.max(0, (mf.p - 0.04) / 0.9)) * words.length);
     if (n !== litCount) {
       for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < n);
       litCount = n;
@@ -140,7 +170,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { rootMargin: '0px 0px -7% 0px', threshold: 0 });
+    }, { rootMargin: '0px 0px 8% 0px', threshold: 0 });
     Array.prototype.forEach.call(targets, function (t) { io.observe(t); });
   } else {
     Array.prototype.forEach.call(targets, function (t) { t.classList.add('in'); });
