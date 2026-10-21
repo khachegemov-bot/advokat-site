@@ -287,7 +287,7 @@ h2 i{font-style:italic;color:var(--gold-hi)}
 .btn-txt{background:none;border:0;color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;padding:15px 4px;transition:color .4s}
 .btn-txt:hover{color:var(--bone)}
 .done{text-align:center;padding:26px 0}
-.done svg{width:46px;height:46px;stroke:var(--gold);fill:none;stroke-width:1.2;margin:0 auto 22px}
+
 .done b{display:block;font-family:var(--serif);font-size:25px;font-weight:400;margin-bottom:12px}
 .done p{color:var(--muted);font-size:15px;margin:0 auto;max-width:42ch}
 
@@ -414,4 +414,121 @@ section[id],#top{scroll-margin-top:96px}
   .mono{width:34px;height:34px;font-size:13px}
   .hdr{padding:16px var(--gutter)}
   .hdr.stuck{padding:11px var(--gutter)}
+}
+
+/* =====================================================================
+   КАБИНЕТ АДВОКАТА: печать, латунь, лампа, страницы дела
+   ===================================================================== */
+
+/* ---------- типографика: заголовки без висячих коротышей ---------- */
+h1,h2,h3,h4,.manifesto p{text-wrap:balance}
+p,blockquote{text-wrap:pretty}
+.crow b{font-variant-numeric:lining-nums}
+
+/* ---------- именная печать ---------- */
+.seal{position:relative;width:100%;height:100%}
+.seal svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.s-line{fill:none;stroke:var(--gold);stroke-width:1.1;vector-effect:non-scaling-stroke}
+.s-faint{opacity:.38}
+.s-mill{fill:none;stroke:var(--gold);stroke-width:7;stroke-dasharray:1.1 5.3;opacity:.4}
+.s-text{fill:var(--gold-hi);font-family:var(--sans);font-size:15px;font-weight:500}
+.s-cap{fill:var(--gold);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:4px;text-anchor:middle;opacity:.75}
+.s-gem{fill:var(--gold-hi);opacity:.8}
+.s-scales path{fill:none;stroke:var(--gold-hi);stroke-width:1.3;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.seal-ring{animation:sealSpin 120s linear infinite;will-change:transform}
+@keyframes sealSpin{to{transform:rotate(360deg)}}
+
+/* печать на обложке — внизу справа, как на документе: рядом с подписью,
+   а не у заголовка. Привязана к блоку под именем, поэтому имя не задевает */
+.hero-lower{position:relative}
+.hero-seal{
+  --seal:clamp(250px,22.5vw,330px);
+  position:absolute;z-index:0;pointer-events:none;
+  right:0;top:50%;margin-top:calc(var(--seal) / -2);
+  width:var(--seal);height:var(--seal);
+}
+.hero-seal .seal{opacity:0;transform:scale(.9) rotate(-10deg);animation:sealIn 2s var(--ease) .8s forwards}
+@keyframes sealIn{to{opacity:1;transform:none}}
+.hero-lower>:not(.hero-seal){position:relative;z-index:1}
+/* на узких экранах — крупный водяной знак за текстом, частично за краем */
+@media(max-width:1000px){
+  .hero-lower{position:static}
+  .hero-seal{--seal:min(116vw,640px);z-index:-1;right:calc(var(--seal) * -.44);top:0;margin-top:0;opacity:.16}
+}
+
+/* оттиск в финале формы */
+.stamp{width:156px;height:156px;margin:0 auto 26px}
+.stamp .seal-ring{animation:none}
+.pane.on .stamp{animation:stampIn 1s cubic-bezier(.2,1.45,.35,1) both}
+@keyframes stampIn{
+  0%{opacity:0;transform:scale(1.8) rotate(-26deg)}
+  60%{opacity:1;transform:scale(.95) rotate(-9deg)}
+  100%{opacity:1;transform:scale(1) rotate(-10deg)}
+}
+.stamp::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--gold);opacity:0;pointer-events:none}
+.pane.on .stamp::after{animation:ink 1.1s ease-out .55s both}
+@keyframes ink{0%{opacity:.6;transform:scale(.96)}100%{opacity:0;transform:scale(1.38)}}
+.pane.on .done b,.pane.on .done p{animation:fadeUp .7s var(--ease) both}
+.pane.on .done b{animation-delay:.55s}
+.pane.on .done p{animation-delay:.72s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- латунная табличка: по имени время от времени пробегает блик ---------- */
+h1.hero-name .sur{
+  background-image:
+    linear-gradient(105deg,transparent 44%,rgba(255,248,226,.92) 50%,transparent 56%),
+    linear-gradient(94deg,#F4EACB 0%,var(--gold-hi) 42%,#9C7C1B 100%);
+  background-size:260% 100%,100% 100%;
+  background-repeat:no-repeat;
+  background-position:100% 0,0 0;
+  animation:sheen 10s cubic-bezier(.5,0,.25,1) 2.6s infinite;
+}
+@keyframes sheen{0%{background-position:100% 0,0 0}20%,100%{background-position:0% 0,0 0}}
+
+/* ---------- настольная лампа: тёплый круг света идёт за курсором ---------- */
+.lamp{display:none}
+@media (hover:hover) and (pointer:fine){
+  .lamp{
+    display:block;position:fixed;left:0;top:0;z-index:9997;pointer-events:none;
+    width:780px;height:780px;margin:-390px 0 0 -390px;border-radius:50%;
+    background:radial-gradient(circle,rgba(227,197,96,.075) 0%,rgba(227,197,96,.03) 30%,transparent 62%);
+    opacity:0;transition:opacity .9s ease;will-change:transform
+  }
+  .lamp.on{opacity:1}
+}
+
+/* ---------- манифест: текст закреплён, слова загораются по мере чтения ---------- */
+.manifesto{padding:0}
+.m-pin{display:flex;align-items:center;justify-content:center;padding:clamp(88px,13vh,150px) var(--gutter)}
+.js .m-stage{height:230vh}
+.js .m-pin{position:sticky;top:0;height:100vh;height:100svh;padding:64px var(--gutter) 0}
+.js .m-text .w{opacity:.13;transition:opacity .55s ease}
+.js .m-text .w.on{opacity:1}
+.js .manifesto .sig{opacity:0;transform:translateY(10px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .manifesto.lit .sig{opacity:1;transform:none}
+.js .manifesto .emblem path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--draw,0))}
+
+/* ---------- практика как статьи кодекса: крупный номер водяным знаком ---------- */
+.cards{counter-reset:art}
+.card{counter-increment:art}
+.card>*{position:relative;z-index:1}
+.card::after{
+  content:counter(art,decimal-leading-zero);
+  position:absolute;right:16px;bottom:-38px;z-index:0;pointer-events:none;
+  font-family:var(--serif);font-style:italic;font-size:156px;line-height:1;
+  color:rgba(201,162,39,.045);
+  transition:color .7s var(--ease),transform .9s var(--ease)
+}
+.card:hover::after{color:rgba(201,162,39,.11);transform:translateY(-10px)}
+
+/* ---------- кто просил меньше движения ---------- */
+@media (prefers-reduced-motion:reduce){
+  .seal-ring,h1.hero-name .sur{animation:none}
+  .hero-seal .seal{animation:none;opacity:1;transform:none}
+  .lamp{display:none}
+  .js .m-stage{height:auto}
+  .js .m-pin{position:static;height:auto;padding:clamp(88px,13vh,150px) var(--gutter)}
+  .js .m-text .w{opacity:1}
+  .js .manifesto .sig{opacity:1;transform:none}
+  .js .manifesto .emblem path{stroke-dashoffset:0}
 }

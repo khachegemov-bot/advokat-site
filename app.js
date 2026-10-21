@@ -3,6 +3,7 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PHONE = '79188317111';
+  document.documentElement.classList.add('js');
 
   /* ---------- год в подвале ---------- */
   var yr = document.getElementById('yr');
@@ -20,6 +21,7 @@
   var hdr = document.getElementById('hdr');
   var bar = document.getElementById('bar');
   var glow = document.getElementById('glow');
+  var heroSeal = document.getElementById('heroSeal');
   var ticking = false;
 
   function onScroll() {
@@ -28,16 +30,20 @@
 
     if (hdr) hdr.classList.toggle('stuck', y > 40);
     if (bar) bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
-    if (glow && !reduced && y < window.innerHeight * 1.4) {
-      glow.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
+    if (!reduced && y < window.innerHeight * 1.4) {
+      if (glow) glow.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0)';
+      if (heroSeal) heroSeal.style.transform = 'translate3d(0,' + (y * 0.22).toFixed(1) + 'px,0)';
     }
     paintSteps(y);
+    paintManifesto();
     ticking = false;
   }
 
-  window.addEventListener('scroll', function () {
+  function requestPaint() {
     if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
-  }, { passive: true });
+  }
+  window.addEventListener('scroll', requestPaint, { passive: true });
+  window.addEventListener('resize', requestPaint, { passive: true });
 
   /* ---------- линия прогресса в блоке «Порядок работы» ---------- */
   var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
@@ -59,6 +65,72 @@
     for (var i = 0; i < steps.length; i++) {
       steps[i].classList.toggle('on', rects[i].top < anchor + 40);
     }
+  }
+
+  /* ---------- манифест: слова загораются по мере чтения ---------- */
+  var man = document.getElementById('manifesto');
+  var mText = man && man.querySelector('.m-text');
+  var mStage = man && man.querySelector('.m-stage');
+  var words = [];
+  var litCount = -1;
+
+  if (mText && !reduced) {
+    // каждое слово — в свой span; неразрывные пробелы не трогаем,
+    // поэтому предлог загорается вместе со своим словом
+    (function wrap(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          c.nodeValue.split(/([ \t\r\n]+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^[ \t\r\n]+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span');
+            w.className = 'w';
+            w.textContent = part;
+            frag.appendChild(w);
+            words.push(w);
+          });
+          node.replaceChild(frag, c);
+        } else if (c.nodeType === 1) {
+          wrap(c);
+        }
+      });
+    })(mText);
+  }
+
+  function paintManifesto() {
+    if (!mStage || !words.length) return;
+    var r = mStage.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    var span = r.height - window.innerHeight;
+    var p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 1;
+    man.style.setProperty('--draw', Math.min(1, p / 0.12).toFixed(3));
+    var t = Math.min(1, Math.max(0, (p - 0.1) / 0.72));
+    var n = Math.round(t * words.length);
+    if (n !== litCount) {
+      for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < n);
+      litCount = n;
+      man.classList.toggle('lit', n === words.length);
+    }
+  }
+
+  /* ---------- настольная лампа: свет идёт за курсором с лёгкой инерцией ---------- */
+  var lamp = document.getElementById('lamp');
+  if (lamp && !reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var lx = 0, ly = 0, tx = 0, ty = 0, lampRaf = 0;
+    var lampStep = function () {
+      lx += (tx - lx) * 0.12;
+      ly += (ty - ly) * 0.12;
+      lamp.style.transform = 'translate3d(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px,0)';
+      lampRaf = (Math.abs(tx - lx) > 0.4 || Math.abs(ty - ly) > 0.4) ? window.requestAnimationFrame(lampStep) : 0;
+    };
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      tx = e.clientX; ty = e.clientY;
+      if (!lamp.classList.contains('on')) { lx = tx; ly = ty; lamp.classList.add('on'); }
+      if (!lampRaf) lampRaf = window.requestAnimationFrame(lampStep);
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () { lamp.classList.remove('on'); });
   }
 
   /* ---------- появление блоков при прокрутке ---------- */

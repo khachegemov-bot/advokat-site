@@ -20,10 +20,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#08080A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2308080A'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='%23C9A227' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23E3C560' text-anchor='middle'%3E%D0%A7%D0%AF%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="fonts/playfair-display-400-normal-cyrillic.woff2?v=2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/inter-400-normal-cyrillic.woff2?v=2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=3">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="preload" href="fonts/playfair-display-400-normal-cyrillic.woff2?v=3" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-400-normal-cyrillic.woff2?v=3" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=4">
+<link rel="stylesheet" href="styles.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,8 +54,9 @@
 </head>
 <body>
 
-<a class="skip" href="#top">Перейти к содержанию</a>
+<a class="skip" href="#top">Перейти к&nbsp;содержанию</a>
 <div class="grain" aria-hidden="true"></div>
+<div class="lamp" id="lamp" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
 <!-- ======================= HEADER ======================= -->
@@ -63,13 +64,13 @@
   <a href="#top" class="brand" aria-label="Чегемов Ян Эдуардович — на главную">
     <span class="mono" aria-hidden="true">ЧЯ</span>
     <span>
-      <span class="bn">Чегемов Ян Эдуардович</span>
+      <span class="bn">Чегемов Ян&nbsp;Эдуардович</span>
       <span class="bs">Адвокат · уголовная защита</span>
     </span>
   </a>
 
   <nav class="nav" id="nav" aria-label="Основная навигация">
-    <a href="#about">Об адвокате</a>
+    <a href="#about">Об&nbsp;адвокате</a>
     <a href="#practice">Практика</a>
     <a href="#process">Порядок работы</a>
     <a href="#outcomes">Результат</a>
@@ -85,28 +86,48 @@
   <div class="hero-bg" aria-hidden="true"><div class="hero-glow" id="glow"></div></div>
 
   <div class="hero-inner">
-    <div class="eyebrow rv">Адвокат · Республика Северная Осетия — Алания</div>
+    <div class="eyebrow rv">Адвокат · Республика Северная Осетия&nbsp;— Алания</div>
 
     <h1 class="hero-name">
       <span class="mask"><span class="d-80"><em>Чегемов</em></span></span>
-      <span class="mask"><span class="sur d-200">Ян Эдуардович</span></span>
+      <span class="mask"><span class="sur d-200">Ян&nbsp;Эдуардович</span></span>
     </h1>
 
-    <div class="hero-rule rv d-420"></div>
+    <div class="hero-lower">
+      <div class="hero-rule rv d-420"></div>
 
-    <p class="hero-lede rv d-520">
-      Защита по уголовным делам. <b>С первого допроса — до приговора и после него.</b>
-    </p>
+      <p class="hero-lede rv d-520">
+        Защита по&nbsp;уголовным делам. <b>С&nbsp;первого допроса&nbsp;— до&nbsp;приговора и&nbsp;после него.</b>
+      </p>
 
-    <div class="hero-actions rv d-640">
-      <a href="#book" class="btn btn-solid">
-        <span>Записаться на консультацию</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="tel:+79188317111" class="btn btn-ghost">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg>
-        <span>+7 918 831 71 11</span>
-      </a>
+      <div class="hero-actions rv d-640">
+        <a href="#book" class="btn btn-solid">
+          <span>Записаться на&nbsp;консультацию</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="tel:+79188317111" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg>
+          <span>+7&nbsp;918&nbsp;831&nbsp;71&nbsp;11</span>
+        </a>
+      </div>
+      <div class="hero-seal" id="heroSeal" aria-hidden="true">
+        <div class="seal">
+        <svg class="seal-ring" viewBox="0 0 400 400" focusable="false">
+          <defs><path id="sp-hero" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+          <circle cx="200" cy="200" r="196" class="s-line"/>
+          <circle cx="200" cy="200" r="189" class="s-line s-faint"/>
+          <text class="s-text"><textPath href="#sp-hero" textLength="1066" lengthAdjust="spacing">АДВОКАТ · ЧЕГЕМОВ ЯН ЭДУАРДОВИЧ · УГОЛОВНАЯ ЗАЩИТА · </textPath></text>
+          <circle cx="200" cy="200" r="152" class="s-line"/>
+        </svg>
+        <svg class="seal-core" viewBox="0 0 400 400" focusable="false">
+          <circle cx="200" cy="200" r="144" class="s-mill"/>
+          <circle cx="200" cy="200" r="133" class="s-line s-faint"/>
+          <path class="s-gem" d="M200 92l5 5-5 5-5-5z"/>
+          <g class="s-scales" transform="translate(140 128) scale(2.5)"><path d="M24 5v36M14 41h20M8 14h32M24 8.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M13 14 7 27h12L13 14zM35 14l-6 13h12l-6-13z"/><path d="M7 27a6 6 0 0 0 12 0M29 27a6 6 0 0 0 12 0"/></g>
+          <text class="s-cap" x="200" y="296">ВЛАДИКАВКАЗ</text>
+        </svg>
+        </div>
+      </div>
     </div>
 
     <div class="hero-meta">
@@ -119,18 +140,22 @@
 </section>
 
 <!-- ======================= MANIFESTO ======================= -->
-<section class="manifesto">
-  <div class="wrap rv">
+<section class="manifesto" id="manifesto">
+  <div class="m-stage">
+    <div class="m-pin">
+      <div class="wrap">
     <svg class="emblem" viewBox="0 0 48 48" aria-hidden="true">
-      <path d="M24 5v36M14 41h20M8 14h32M24 8.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/>
-      <path d="M13 14 7 27h12L13 14zM35 14l-6 13h12l-6-13z"/>
-      <path d="M7 27a6 6 0 0 0 12 0M29 27a6 6 0 0 0 12 0"/>
+      <path pathLength="1" d="M24 5v36M14 41h20M8 14h32M24 8.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/>
+      <path pathLength="1" d="M13 14 7 27h12L13 14zM35 14l-6 13h12l-6-13z"/>
+      <path pathLength="1" d="M7 27a6 6 0 0 0 12 0M29 27a6 6 0 0 0 12 0"/>
     </svg>
-    <p>
-      Уголовное дело начинается не с приговора. Оно начинается с повестки, со звонка в дверь,
-      с фразы <b>«просто поговорим, без протокола»</b>. Именно там, в первые часы, решается почти всё.
+    <p class="m-text">
+      Уголовное дело начинается не&nbsp;с&nbsp;приговора. Оно начинается с&nbsp;повестки, со&nbsp;звонка в&nbsp;дверь,
+      с&nbsp;фразы <b>«просто поговорим, без протокола»</b>. Именно там, в&nbsp;первые часы, решается почти всё.
     </p>
-    <div class="sig">Ян Эдуардович Чегемов</div>
+    <div class="sig">Ян&nbsp;Эдуардович Чегемов</div>
+  </div>
+    </div>
   </div>
 </section>
 
@@ -151,24 +176,24 @@
           </picture>
           <div class="ph">Здесь<br>будет<br>портрет</div>
         </div>
-        <div class="portrait-cap">Адвокат<b>Чегемов Ян Эдуардович</b></div>
+        <div class="portrait-cap">Адвокат<b>Чегемов Ян&nbsp;Эдуардович</b></div>
       </div>
 
       <div>
-        <div class="tag rv">Об адвокате</div>
-        <h2 class="rv d-60">Человек, который <i>говорит за вас</i>, когда вы молчите</h2>
+        <div class="tag rv">Об&nbsp;адвокате</div>
+        <h2 class="rv d-60">Человек, который <i>говорит за&nbsp;вас</i>, когда вы&nbsp;молчите</h2>
 
         <p class="lede rv d-140">
-          Уголовная защита — это не красноречие в зале суда. Это работа с документом, со сроком,
-          с процессуальной ошибкой следователя, которую нужно заметить первым и зафиксировать вовремя.
-          Ян Эдуардович ведёт дело от первого разговора в кабинете следователя до вступления приговора
-          в законную силу — и дальше, если нужна апелляция, кассация или условно-досрочное освобождение.
+          Уголовная защита&nbsp;— это не&nbsp;красноречие в&nbsp;зале суда. Это работа с&nbsp;документом, со&nbsp;сроком,
+          с&nbsp;процессуальной ошибкой следователя, которую нужно заметить первым и&nbsp;зафиксировать вовремя.
+          Ян&nbsp;Эдуардович ведёт дело от&nbsp;первого разговора в&nbsp;кабинете следователя до&nbsp;вступления приговора
+          в&nbsp;законную силу&nbsp;— и&nbsp;дальше, если нужна апелляция, кассация или условно-досрочное освобождение.
         </p>
 
         <p class="lede rv d-200">
-          Доверитель всегда знает, на какой стадии находится его дело, какие документы поданы
-          и что будет следующим шагом. Без обещаний «решить вопрос» и без разговоров о связях —
-          только процессуальная работа и честная оценка перспективы.
+          Доверитель всегда знает, на&nbsp;какой стадии находится его дело, какие документы поданы
+          и&nbsp;что будет следующим шагом. Без обещаний «решить вопрос» и&nbsp;без разговоров о&nbsp;связях&nbsp;—
+          только процессуальная работа и&nbsp;честная оценка перспективы.
         </p>
 
         <dl class="facts rv d-260">
@@ -182,7 +207,7 @@
         </dl>
 
         <blockquote class="pull rv d-320">
-          «Худшее, что можно сделать, — это дать показания раньше, чем рядом появится защитник.
+          «Худшее, что можно сделать,&nbsp;— это дать показания раньше, чем рядом появится защитник.
           Всё остальное поправимо.»
         </blockquote>
       </div>
@@ -197,11 +222,11 @@
     <div class="p-head">
       <div>
         <div class="tag rv">Практика</div>
-        <h2 class="rv d-60">На любой стадии.<br><i>Чем раньше — тем больше рычагов</i></h2>
+        <h2 class="rv d-60">На&nbsp;любой стадии.<br><i>Чем раньше&nbsp;— тем больше рычагов</i></h2>
       </div>
       <p class="lede rv d-140">
-        Защита строится по-разному в зависимости от того, где сейчас находится дело. Ниже — стадии,
-        на которых адвокат вступает в работу, и то, что он делает на каждой из них.
+        Защита строится по-разному в&nbsp;зависимости от&nbsp;того, где сейчас находится дело. Ниже&nbsp;— стадии,
+        на&nbsp;которых адвокат вступает в&nbsp;работу, и&nbsp;то, что он&nbsp;делает на&nbsp;каждой из&nbsp;них.
       </p>
     </div>
 
@@ -209,56 +234,56 @@
       <article class="card rv d-0">
         <div class="card-n">01</div>
         <h3>Доследственная проверка</h3>
-        <p>Вызвали «побеседовать», просят объяснение, проводят опрос. Стадия, на которой дело ещё можно не допустить до возбуждения.</p>
-        <div class="arw">Работа до возбуждения дела</div>
+        <p>Вызвали «побеседовать», просят объяснение, проводят опрос. Стадия, на&nbsp;которой дело ещё можно не&nbsp;допустить до&nbsp;возбуждения.</p>
+        <div class="arw">Работа до&nbsp;возбуждения дела</div>
       </article>
 
       <article class="card rv d-80">
         <div class="card-n">02</div>
-        <h3>Задержание и мера пресечения</h3>
-        <p>Первые 48 часов. Участие в допросе, обжалование задержания, работа против заключения под стражу — домашний арест, залог, подписка.</p>
+        <h3>Задержание и&nbsp;мера пресечения</h3>
+        <p>Первые 48&nbsp;часов. Участие в&nbsp;допросе, обжалование задержания, работа против заключения под стражу&nbsp;— домашний арест, залог, подписка.</p>
         <div class="arw">Срочный выезд</div>
       </article>
 
       <article class="card rv d-160">
         <div class="card-n">03</div>
         <h3>Предварительное следствие</h3>
-        <p>Ходатайства, экспертизы, работа с доказательной базой, обжалование действий следователя, ознакомление с материалами дела.</p>
+        <p>Ходатайства, экспертизы, работа с&nbsp;доказательной базой, обжалование действий следователя, ознакомление с&nbsp;материалами дела.</p>
         <div class="arw">Ядро защиты</div>
       </article>
 
       <article class="card rv d-0">
         <div class="card-n">04</div>
         <h3>Суд первой инстанции</h3>
-        <p>Позиция защиты, допрос свидетелей, оспаривание экспертиз, прения. Работа на переквалификацию и на смягчение наказания.</p>
+        <p>Позиция защиты, допрос свидетелей, оспаривание экспертиз, прения. Работа на&nbsp;переквалификацию и&nbsp;на&nbsp;смягчение наказания.</p>
         <div class="arw">Процесс</div>
       </article>
 
       <article class="card rv d-80">
         <div class="card-n">05</div>
-        <h3>Апелляция и кассация</h3>
-        <p>Обжалование приговора и промежуточных решений. Поиск нарушений, допущенных судом и следствием, на всю глубину дела.</p>
+        <h3>Апелляция и&nbsp;кассация</h3>
+        <p>Обжалование приговора и&nbsp;промежуточных решений. Поиск нарушений, допущенных судом и&nbsp;следствием, на&nbsp;всю глубину дела.</p>
         <div class="arw">Пересмотр</div>
       </article>
 
       <article class="card rv d-160">
         <div class="card-n">06</div>
-        <h3>УДО и смягчение режима</h3>
-        <p>Условно-досрочное освобождение, замена наказания более мягким, снятие судимости, сопровождение по месту отбывания.</p>
+        <h3>УДО и&nbsp;смягчение режима</h3>
+        <p>Условно-досрочное освобождение, замена наказания более мягким, снятие судимости, сопровождение по&nbsp;месту отбывания.</p>
         <div class="arw">После приговора</div>
       </article>
 
       <article class="card rv d-0">
         <div class="card-n">07</div>
         <h3>Экономические составы</h3>
-        <p>Мошенничество, присвоение и растрата, налоговые составы, злоупотребление полномочиями. Дела с документами и экспертизой.</p>
+        <p>Мошенничество, присвоение и&nbsp;растрата, налоговые составы, злоупотребление полномочиями. Дела с&nbsp;документами и&nbsp;экспертизой.</p>
         <div class="arw">Бизнес под следствием</div>
       </article>
 
       <article class="card rv d-80">
         <div class="card-n">08</div>
         <h3>Защита потерпевшего</h3>
-        <p>Другая сторона процесса: заявление о преступлении, представление интересов, гражданский иск о возмещении вреда.</p>
+        <p>Другая сторона процесса: заявление о&nbsp;преступлении, представление интересов, гражданский иск о&nbsp;возмещении вреда.</p>
         <div class="arw">Если пострадали вы</div>
       </article>
     </div>
@@ -274,11 +299,11 @@
         <div class="tag rv">Порядок работы</div>
         <h2 class="rv d-60">Как всё будет <i>устроено</i></h2>
         <p class="lede rv d-140">
-          Никакой неопределённости. Вы с самого начала понимаете, что происходит,
-          сколько это стоит и что будет дальше.
+          Никакой неопределённости. Вы&nbsp;с&nbsp;самого начала понимаете, что происходит,
+          сколько это стоит и&nbsp;что будет дальше.
         </p>
         <a href="#book" class="btn btn-solid rv d-220 process-cta">
-          <span>Начать с консультации</span>
+          <span>Начать с&nbsp;консультации</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -290,35 +315,35 @@
           <span class="step-dot" aria-hidden="true"></span>
           <div class="step-k">Шаг первый</div>
           <h4>Звонок или сообщение</h4>
-          <p>Коротко о ситуации: что произошло, есть ли уже процессуальный статус, назначены ли следственные действия. Если человек задержан — разговор происходит немедленно, в любое время.</p>
+          <p>Коротко о&nbsp;ситуации: что произошло, есть ли&nbsp;уже процессуальный статус, назначены ли&nbsp;следственные действия. Если человек задержан&nbsp;— разговор происходит немедленно, в&nbsp;любое время.</p>
         </div>
 
         <div class="step rv">
           <span class="step-dot" aria-hidden="true"></span>
           <div class="step-k">Шаг второй</div>
-          <h4>Консультация и оценка перспективы</h4>
-          <p>Разбор документов, которые есть на руках. Честный ответ: что реально можно сделать, чего нельзя, и какой исход является в этой ситуации хорошим. Без завышенных ожиданий.</p>
+          <h4>Консультация и&nbsp;оценка перспективы</h4>
+          <p>Разбор документов, которые есть на&nbsp;руках. Честный ответ: что реально можно сделать, чего нельзя, и&nbsp;какой исход является в&nbsp;этой ситуации хорошим. Без завышенных ожиданий.</p>
         </div>
 
         <div class="step rv">
           <span class="step-dot" aria-hidden="true"></span>
           <div class="step-k">Шаг третий</div>
-          <h4>Соглашение и ордер</h4>
-          <p>Заключается письменное соглашение об оказании юридической помощи с понятной суммой и объёмом работы. Выписывается ордер — с этого момента адвокат официально вступает в дело.</p>
+          <h4>Соглашение и&nbsp;ордер</h4>
+          <p>Заключается письменное соглашение об&nbsp;оказании юридической помощи с&nbsp;понятной суммой и&nbsp;объёмом работы. Выписывается ордер&nbsp;— с&nbsp;этого момента адвокат официально вступает в&nbsp;дело.</p>
         </div>
 
         <div class="step rv">
           <span class="step-dot" aria-hidden="true"></span>
           <div class="step-k">Шаг четвёртый</div>
           <h4>Линия защиты</h4>
-          <p>Формируется позиция, готовятся ходатайства и жалобы, собираются доказательства, при необходимости привлекаются специалисты и независимые эксперты.</p>
+          <p>Формируется позиция, готовятся ходатайства и&nbsp;жалобы, собираются доказательства, при необходимости привлекаются специалисты и&nbsp;независимые эксперты.</p>
         </div>
 
         <div class="step rv">
           <span class="step-dot" aria-hidden="true"></span>
           <div class="step-k">Шаг пятый</div>
-          <h4>Сопровождение до результата</h4>
-          <p>Участие во всех следственных действиях и заседаниях, связь с доверителем и его семьёй, обжалование до тех пор, пока остаются инстанции.</p>
+          <h4>Сопровождение до&nbsp;результата</h4>
+          <p>Участие во&nbsp;всех следственных действиях и&nbsp;заседаниях, связь с&nbsp;доверителем и&nbsp;его семьёй, обжалование до&nbsp;тех пор, пока остаются инстанции.</p>
         </div>
       </div>
 
@@ -332,25 +357,25 @@
     <div class="tag rv">Результат</div>
     <h2 class="rv d-60">Чего <i>реально</i> можно добиться</h2>
     <p class="lede rv d-140">
-      Исход уголовного дела почти никогда не бывает бинарным — «посадят или нет». Между этими
-      полюсами есть целый набор результатов, каждый из которых меняет жизнь человека.
+      Исход уголовного дела почти никогда не&nbsp;бывает бинарным&nbsp;— «посадят или нет». Между этими
+      полюсами есть целый набор результатов, каждый из&nbsp;которых меняет жизнь человека.
     </p>
 
     <div class="out-list">
-      <div class="out rv"><b>Отказ в возбуждении дела</b><span>Работа на стадии проверки, когда дела как такового ещё нет.</span></div>
-      <div class="out rv d-70"><b>Прекращение уголовного дела</b><span>За отсутствием состава, за примирением сторон, с судебным штрафом.</span></div>
-      <div class="out rv d-140"><b>Переквалификация</b><span>На более мягкую статью или часть — иная санкция, иная категория тяжести.</span></div>
+      <div class="out rv"><b>Отказ в&nbsp;возбуждении дела</b><span>Работа на&nbsp;стадии проверки, когда дела как такового ещё нет.</span></div>
+      <div class="out rv d-70"><b>Прекращение уголовного дела</b><span>За&nbsp;отсутствием состава, за&nbsp;примирением сторон, с&nbsp;судебным штрафом.</span></div>
+      <div class="out rv d-140"><b>Переквалификация</b><span>На&nbsp;более мягкую статью или часть&nbsp;— иная санкция, иная категория тяжести.</span></div>
       <div class="out rv d-210"><b>Мера пресечения без СИЗО</b><span>Домашний арест, запрет определённых действий, залог, подписка.</span></div>
-      <div class="out rv"><b>Оправдательный приговор</b><span>Редкий, но достижимый результат при системных нарушениях следствия.</span></div>
-      <div class="out rv d-70"><b>Наказание, не связанное с лишением свободы</b><span>Условный срок, штраф, принудительные работы вместо колонии.</span></div>
-      <div class="out rv d-140"><b>Смягчение по апелляции</b><span>Снижение срока, исключение эпизодов, изменение вида режима.</span></div>
-      <div class="out rv d-210"><b>Условно-досрочное освобождение</b><span>Выход раньше срока и замена наказания более мягким видом.</span></div>
+      <div class="out rv"><b>Оправдательный приговор</b><span>Редкий, но&nbsp;достижимый результат при системных нарушениях следствия.</span></div>
+      <div class="out rv d-70"><b>Наказание, не&nbsp;связанное с&nbsp;лишением свободы</b><span>Условный срок, штраф, принудительные работы вместо колонии.</span></div>
+      <div class="out rv d-140"><b>Смягчение по&nbsp;апелляции</b><span>Снижение срока, исключение эпизодов, изменение вида режима.</span></div>
+      <div class="out rv d-210"><b>Условно-досрочное освобождение</b><span>Выход раньше срока и&nbsp;замена наказания более мягким видом.</span></div>
     </div>
 
     <p class="note rv">
-      Адвокат не вправе гарантировать конкретный исход дела — это прямо запрещено правилами
-      профессиональной этики, и любое такое обещание должно настораживать. Гарантировать можно
-      другое: что будет сделано всё предусмотренное законом, в срок и в полном объёме.
+      Адвокат не&nbsp;вправе гарантировать конкретный исход дела&nbsp;— это прямо запрещено правилами
+      профессиональной этики, и&nbsp;любое такое обещание должно настораживать. Гарантировать можно
+      другое: что будет сделано всё предусмотренное законом, в&nbsp;срок и&nbsp;в&nbsp;полном объёме.
     </p>
   </div>
 </section>
@@ -362,20 +387,20 @@
 
       <div>
         <div class="tag rv">Запись</div>
-        <h2 class="rv d-60">Первый разговор — <i>бесплатный</i></h2>
+        <h2 class="rv d-60">Первый разговор&nbsp;— <i>бесплатный</i></h2>
         <p class="lede rv d-140">
-          Опишите ситуацию в двух словах. Если дело срочное — звоните напрямую,
-          в любое время суток. Всё сказанное защищено адвокатской тайной.
+          Опишите ситуацию в&nbsp;двух словах. Если дело срочное&nbsp;— звоните напрямую,
+          в&nbsp;любое время суток. Всё сказанное защищено адвокатской тайной.
         </p>
 
         <div class="contact-row rv d-200">
           <a class="crow" href="tel:+79188317111">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1z"/></svg>
-            <div><small>Телефон · круглосуточно</small><b>+7 918 831 71 11</b></div>
+            <div><small>Телефон · круглосуточно</small><b>+7&nbsp;918&nbsp;831&nbsp;71&nbsp;11</b></div>
           </a>
           <a class="crow" href="https://wa.me/79188317111" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.7-5A9 9 0 1 1 8 19.3L3 21z"/><path d="M8.6 8.4c.3-.7.6-.7.9-.7h.7c.2 0 .5 0 .8.6l1 2.3c.1.3.1.5 0 .7l-.5.7c-.2.2-.3.4-.1.7a7 7 0 0 0 3.3 2.9c.3.1.5.1.7-.1l.8-.9c.2-.2.4-.2.7-.1l2.2 1c.3.2.5.3.5.5v.8c0 .4-.4 1.3-1.6 1.6-2 .5-5-1-7-3s-3.6-4.8-3.1-6.8z"/></svg>
-            <div><small>WhatsApp</small><b>Написать в WhatsApp</b></div>
+            <div><small>WhatsApp</small><b>Написать в&nbsp;WhatsApp</b></div>
           </a>
           <div class="crow">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
@@ -387,21 +412,21 @@
       <!-- FORM -->
       <div class="form rv d-120">
         <div class="f-top">
-          <b>Запись на консультацию</b>
+          <b>Запись на&nbsp;консультацию</b>
           <div class="f-dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
         </div>
 
         <form id="bookForm" novalidate>
 
           <div class="pane on" data-pane="0">
-            <div class="q">Шаг 1 из 3 — на какой стадии дело?</div>
+            <div class="q">Шаг 1&nbsp;из&nbsp;3&nbsp;— на&nbsp;какой стадии дело?</div>
             <div class="opts">
               <div class="opt"><input type="radio" name="stage" id="s1" value="Доследственная проверка, вызывают на беседу"><label for="s1">Вызывают «побеседовать», дела ещё нет</label></div>
-              <div class="opt"><input type="radio" name="stage" id="s2" value="Задержание / избрание меры пресечения"><label for="s2">Задержали — нужен адвокат срочно</label></div>
+              <div class="opt"><input type="radio" name="stage" id="s2" value="Задержание / избрание меры пресечения"><label for="s2">Задержали&nbsp;— нужен адвокат срочно</label></div>
               <div class="opt"><input type="radio" name="stage" id="s3" value="Идёт предварительное следствие"><label for="s3">Идёт следствие</label></div>
-              <div class="opt"><input type="radio" name="stage" id="s4" value="Дело в суде первой инстанции"><label for="s4">Дело уже в суде</label></div>
+              <div class="opt"><input type="radio" name="stage" id="s4" value="Дело в суде первой инстанции"><label for="s4">Дело уже в&nbsp;суде</label></div>
               <div class="opt"><input type="radio" name="stage" id="s5" value="Приговор вынесен — апелляция / кассация / УДО"><label for="s5">Приговор вынесен</label></div>
-              <div class="opt"><input type="radio" name="stage" id="s6" value="Другая ситуация"><label for="s6">Другое / пока не знаю</label></div>
+              <div class="opt"><input type="radio" name="stage" id="s6" value="Другая ситуация"><label for="s6">Другое / пока не&nbsp;знаю</label></div>
             </div>
             <div class="f-nav">
               <button type="button" class="btn btn-solid btn-sm" data-next><span>Далее</span>
@@ -411,14 +436,14 @@
           </div>
 
           <div class="pane" data-pane="1">
-            <div class="q">Шаг 2 из 3 — насколько срочно</div>
+            <div class="q">Шаг 2&nbsp;из&nbsp;3&nbsp;— насколько срочно</div>
             <div class="opts">
-              <div class="opt"><input type="radio" name="urg" id="u1" value="Срочно — счёт идёт на часы"><label for="u1">Срочно — счёт идёт на часы</label></div>
-              <div class="opt"><input type="radio" name="urg" id="u2" value="В ближайшие дни"><label for="u2">В ближайшие дни</label></div>
-              <div class="opt"><input type="radio" name="urg" id="u3" value="Не горит — нужна консультация"><label for="u3">Не горит, нужна консультация</label></div>
+              <div class="opt"><input type="radio" name="urg" id="u1" value="Срочно — счёт идёт на часы"><label for="u1">Срочно&nbsp;— счёт идёт на&nbsp;часы</label></div>
+              <div class="opt"><input type="radio" name="urg" id="u2" value="В ближайшие дни"><label for="u2">В&nbsp;ближайшие дни</label></div>
+              <div class="opt"><input type="radio" name="urg" id="u3" value="Не горит — нужна консультация"><label for="u3">Не&nbsp;горит, нужна консультация</label></div>
             </div>
             <div class="fld fld-gap">
-              <label for="desc">Коротко о ситуации</label>
+              <label for="desc">Коротко о&nbsp;ситуации</label>
               <textarea id="desc" name="desc" placeholder="Статья, что уже произошло, есть ли документы на руках…"></textarea>
             </div>
             <div class="f-nav">
@@ -430,9 +455,9 @@
           </div>
 
           <div class="pane" data-pane="2">
-            <div class="q">Шаг 3 из 3 — как с вами связаться</div>
+            <div class="q">Шаг 3&nbsp;из&nbsp;3&nbsp;— как с&nbsp;вами связаться</div>
             <div class="fld">
-              <label for="nm">Как к вам обращаться</label>
+              <label for="nm">Как к&nbsp;вам обращаться</label>
               <input type="text" id="nm" name="nm" placeholder="Имя" autocomplete="name">
             </div>
             <div class="fld">
@@ -442,21 +467,36 @@
             <div class="f-nav">
               <button type="button" class="btn-txt" data-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Назад</span></button>
               <button type="submit" class="btn btn-solid btn-sm">
-                <span>Отправить в WhatsApp</span>
+                <span>Отправить в&nbsp;WhatsApp</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </button>
             </div>
             <p class="f-note">
-              Нажимая кнопку, вы открываете WhatsApp с уже готовым сообщением — останется только отправить.
-              Переписка конфиденциальна и защищена адвокатской тайной.
+              Нажимая кнопку, вы&nbsp;открываете WhatsApp с&nbsp;уже готовым сообщением&nbsp;— останется только отправить.
+              Переписка конфиденциальна и&nbsp;защищена адвокатской тайной.
             </p>
           </div>
 
           <div class="pane" data-pane="3">
             <div class="done">
-              <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20"/><path d="M15 24.5l6.5 6.5L33 19"/></svg>
+              <div class="stamp seal" aria-hidden="true">
+<svg class="seal-ring" viewBox="0 0 400 400" focusable="false">
+      <defs><path id="sp-stamp" d="M200,200 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs>
+      <circle cx="200" cy="200" r="196" class="s-line"/>
+      <circle cx="200" cy="200" r="189" class="s-line s-faint"/>
+      <text class="s-text"><textPath href="#sp-stamp" textLength="1066" lengthAdjust="spacing">АДВОКАТ · ЧЕГЕМОВ ЯН ЭДУАРДОВИЧ · УГОЛОВНАЯ ЗАЩИТА · </textPath></text>
+      <circle cx="200" cy="200" r="152" class="s-line"/>
+    </svg>
+    <svg class="seal-core" viewBox="0 0 400 400" focusable="false">
+      <circle cx="200" cy="200" r="144" class="s-mill"/>
+      <circle cx="200" cy="200" r="133" class="s-line s-faint"/>
+      <path class="s-gem" d="M200 92l5 5-5 5-5-5z"/>
+      <g class="s-scales" transform="translate(140 128) scale(2.5)"><path d="M24 5v36M14 41h20M8 14h32M24 8.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M13 14 7 27h12L13 14zM35 14l-6 13h12l-6-13z"/><path d="M7 27a6 6 0 0 0 12 0M29 27a6 6 0 0 0 12 0"/></g>
+      <text class="s-cap" x="200" y="296">ВЛАДИКАВКАЗ</text>
+    </svg>
+              </div>
               <b>WhatsApp открыт</b>
-              <p>Сообщение уже готово — отправьте его, и Ян Эдуардович свяжется с вами. Если дело срочное, лучше позвонить: +7 918 831 71 11.</p>
+              <p>Сообщение уже готово&nbsp;— отправьте его, и&nbsp;Ян&nbsp;Эдуардович свяжется с&nbsp;вами. Если дело срочное, лучше позвонить: +7&nbsp;918&nbsp;831&nbsp;71&nbsp;11.</p>
             </div>
           </div>
 
@@ -472,12 +512,12 @@
   <div class="f-grid">
     <div>
       <h5>Адвокат</h5>
-      <p>Чегемов<br>Ян Эдуардович</p>
-      <p class="mt-12">Защита по уголовным делам</p>
+      <p>Чегемов<br>Ян&nbsp;Эдуардович</p>
+      <p class="mt-12">Защита по&nbsp;уголовным делам</p>
     </div>
     <div>
       <h5>Связь</h5>
-      <a href="tel:+79188317111">+7 918 831 71 11</a>
+      <a href="tel:+79188317111">+7&nbsp;918&nbsp;831&nbsp;71&nbsp;11</a>
       <a href="https://wa.me/79188317111" target="_blank" rel="noopener">WhatsApp</a>
       <!-- TODO: e-mail -->
     </div>
@@ -485,11 +525,11 @@
       <h5>Приём</h5>
       <p>Владикавказ</p>
       <p>Алагир</p>
-      <p>Республика Северная Осетия — Алания</p>
+      <p>Республика Северная Осетия&nbsp;— Алания</p>
     </div>
     <div>
       <h5>Разделы</h5>
-      <a href="#about">Об адвокате</a>
+      <a href="#about">Об&nbsp;адвокате</a>
       <a href="#practice">Практика</a>
       <a href="#process">Порядок работы</a>
       <a href="#book">Запись</a>
@@ -497,10 +537,10 @@
   </div>
   <div class="f-bot">
     <span>© <span id="yr">2026</span> Чегемов Я. Э. Адвокат.</span>
-    <span>Информация на сайте не является публичной офертой и юридической консультацией.</span>
+    <span>Информация на&nbsp;сайте не&nbsp;является публичной офертой и&nbsp;юридической консультацией.</span>
   </div>
 </footer>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
