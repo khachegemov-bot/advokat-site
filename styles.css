@@ -532,34 +532,3 @@ h1.hero-name .sur{
   .js .manifesto .sig{opacity:1;transform:none}
   .js .manifesto .emblem path{stroke-dashoffset:0}
 }
-
-/* =====================================================================
-   КНОПКА ЗВОНКА НА ТЕЛЕФОНЕ
-   Появляется, когда пролистали обложку (там своя кнопка звонка),
-   и прячется у формы записи и контактов, чтобы не закрывать поля.
-   ===================================================================== */
-.callbar{display:none}
-@media (max-width:860px){
-  .callbar{
-    display:block;position:fixed;left:0;right:0;bottom:0;z-index:800;
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-    background:rgba(8,8,10,.94);border-top:1px solid var(--line-soft);
-    transform:translateY(105%);visibility:hidden;
-    transition:transform .5s var(--ease),visibility 0s linear .5s
-  }
-  .callbar.on{transform:none;visibility:visible;transition:transform .5s var(--ease),visibility 0s}
-  .cb-btn{
-    display:flex;align-items:center;gap:14px;min-height:56px;padding:8px 18px 8px 9px;
-    background:var(--gold);color:#0A0A0B;-webkit-tap-highlight-color:transparent;
-    transition:background .3s ease
-  }
-  .cb-btn:active{background:var(--gold-hi)}
-  .cb-btn:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
-  .cb-ico{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid rgba(10,10,11,.3)}
-  .cb-ico svg{width:17px;height:17px;stroke:#0A0A0B;fill:none;stroke-width:1.6}
-  .cb-t{display:flex;flex-direction:column;font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;line-height:1.35}
-  .cb-t small{font-size:11px;font-weight:400;letter-spacing:.03em;text-transform:none;opacity:.72}
-  .cb-n{margin-left:auto;font-size:15px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
-}
-/* на самых узких экранах номер не помещается — остаётся «Позвонить» */
-@media (max-width:359px){.cb-n{display:none}}
