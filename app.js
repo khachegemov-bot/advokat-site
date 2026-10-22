@@ -48,7 +48,46 @@
   function requestPaint() {
     if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
   }
-  window.addEventListener('scroll', requestPaint, { passive: true });
+
+  /* ---------- плавная инерционная прокрутка ---------- */
+  // Колесо мыши двигает страницу скачками примерно по 100 px, и вместе
+  // с ней скачут все эффекты, привязанные к прокрутке. Lenis превращает
+  // скачки в плавное движение с инерцией. На сенсорных экранах прокрутка
+  // остаётся родной — у неё своя инерция, трогать её не нужно.
+  var lenis = null;
+  if (window.Lenis && !reduced && window.matchMedia('(pointer: fine)').matches) {
+    lenis = new window.Lenis({
+      autoRaf: true,
+      lerp: 0.085,          // мягкость: чем меньше, тем дольше страница «доплывает»
+      smoothWheel: true,
+      wheelMultiplier: 1
+    });
+    // эффекты пересчитываются в том же кадре, что и прокрутка, —
+    // без отставания на кадр, поэтому параллакс не дрожит
+    lenis.on('scroll', onScroll);
+
+    // Переходы по меню. Встроенная обработка ссылок в Lenis не отменяет
+    // обычный переход браузера — страница прыгала к разделу мгновенно.
+    // Здесь прыжок отменяется, и страница плывёт к разделу с мягким
+    // разгоном и торможением. Отступ под шапку Lenis берёт из стилей.
+    // Ссылку «перейти к содержанию» не трогаем: ей важно перевести фокус.
+    var easeInOutCubic = function (t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a || a.classList.contains('skip')) return;
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { duration: 1.3, easing: easeInOutCubic });
+      if (window.history && history.replaceState) history.replaceState(null, '', id);
+    });
+  } else {
+    window.addEventListener('scroll', requestPaint, { passive: true });
+  }
   window.addEventListener('resize', requestPaint, { passive: true });
 
   /* ---------- линия прогресса в блоке «Порядок работы» ---------- */
@@ -206,6 +245,7 @@
       burger.classList.toggle('on', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       document.body.style.overflow = open ? 'hidden' : '';
+      if (lenis) { if (open) lenis.stop(); else lenis.start(); }
     });
     nav.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') {
@@ -213,6 +253,7 @@
         burger.classList.remove('on');
         burger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        if (lenis) lenis.start();
       }
     });
   }

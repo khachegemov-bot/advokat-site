@@ -241,7 +241,7 @@ h2 i{font-style:italic;color:var(--gold-hi)}
 .process-stick{position:sticky;top:130px}
 .steps{position:relative;padding-left:46px}
 .steps::before{content:"";position:absolute;left:11px;top:14px;bottom:14px;width:1px;background:var(--line-soft)}
-.steps-fill{position:absolute;left:11px;top:14px;bottom:14px;width:1px;transform:scaleY(0);transform-origin:50% 0;will-change:transform;background:linear-gradient(180deg,var(--gold-hi),var(--gold));box-shadow:0 0 10px rgba(201,162,39,.5);transition:transform .2s linear}
+.steps-fill{position:absolute;left:11px;top:14px;bottom:14px;width:1px;transform:scaleY(0);transform-origin:50% 0;will-change:transform;background:linear-gradient(180deg,var(--gold-hi),var(--gold));box-shadow:0 0 10px rgba(201,162,39,.5);transition:transform .12s linear}
 .step{position:relative;padding:0 0 50px}
 .step:last-child{padding-bottom:0}
 .step-dot{position:absolute;left:-46px;top:6px;width:23px;height:23px;border-radius:50%;border:1px solid var(--line-soft);background:var(--ink);display:grid;place-items:center;transition:.6s var(--ease)}
@@ -557,7 +557,7 @@ h1.hero-name .sur{
 /* стекло под закреплённой шапкой — на компьютерах; на телефонах
    плотный фон, там размытие при прокрутке действительно тормозит */
 @media (hover:hover) and (pointer:fine){
-  .hdr.stuck{background:rgba(8,8,10,.78);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+  .hdr.stuck{background:rgba(8,8,10,.76);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%)}
 }
 
 /* вечные анимации обложки спят, когда её не видно: глазу незаметно,
@@ -566,3 +566,11 @@ h1.hero-name .sur{
 .hero.hero-off .seal-ring,
 .hero.hero-off h1.hero-name .sur,
 .hero.hero-off .scroll-cue i::after{animation-play-state:paused}
+
+/* ---------- плавная инерционная прокрутка (Lenis) ---------- */
+html.lenis,html.lenis body{height:auto}
+/* встроенная плавность браузера спорила бы с Lenis за каждый кадр */
+html.lenis{scroll-behavior:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-smooth iframe{pointer-events:none}
