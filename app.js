@@ -75,6 +75,7 @@
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     };
     document.addEventListener('click', function (e) {
+      if (!lenis) return;
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a || a.classList.contains('skip')) return;
       var id = a.getAttribute('href');
@@ -89,6 +90,17 @@
     window.addEventListener('scroll', requestPaint, { passive: true });
   }
   window.addEventListener('resize', requestPaint, { passive: true });
+
+  // для страницы диагностики: переключение на родную прокрутку браузера
+  window.__site = {
+    nativeScroll: function () {
+      if (!lenis) return false;
+      lenis.destroy();
+      lenis = null;
+      window.addEventListener('scroll', requestPaint, { passive: true });
+      return true;
+    }
+  };
 
   /* ---------- линия прогресса в блоке «Порядок работы» ---------- */
   var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
