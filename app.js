@@ -144,6 +144,14 @@
     }
   }
 
+  /* ---------- вечные анимации обложки спят, когда её не видно ---------- */
+  var heroEl = document.querySelector('.hero');
+  if (heroEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { heroEl.classList.toggle('hero-off', !e.isIntersecting); });
+    }).observe(heroEl);
+  }
+
   /* ---------- настольная лампа: свет идёт за курсором с лёгкой инерцией ---------- */
   var lamp = document.getElementById('lamp');
   if (lamp && !reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

@@ -41,9 +41,19 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--gold);color:#0A0A0B}
 
 /* ---------- grain ---------- */
+/* плёнка: прежняя текстура и прежнее мерцание. Слой выступает за края
+   экрана на 10% — ровно столько, сколько нужно для сдвигов анимации
+   (раньше выступал на 150% и занимал площадь 16 экранов) */
 .grain{
-  position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.055;
-  background-image:url("grain.webp?v=1");
+  position:fixed;inset:-10%;z-index:9998;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation:grain 7s steps(6) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}10%{transform:translate(-3%,-4%)}20%{transform:translate(-8%,3%)}
+  30%{transform:translate(4%,-6%)}40%{transform:translate(-2%,7%)}50%{transform:translate(-6%,2%)}
+  60%{transform:translate(5%,4%)}70%{transform:translate(-4%,-5%)}80%{transform:translate(2%,6%)}
+  90%{transform:translate(-5%,-2%)}100%{transform:translate(0,0)}
 }
 
 /* ---------- scroll progress ---------- */
@@ -103,10 +113,10 @@ a{color:inherit;text-decoration:none}
 }
 .hero-glow{
   position:absolute;width:min(760px,92vw);aspect-ratio:1;right:-12%;top:6%;
-  background:radial-gradient(circle,rgba(201,162,39,.13) 0%,rgba(201,162,39,.06) 34%,transparent 66%);
+  background:radial-gradient(circle,rgba(201,162,39,.16),transparent 62%);filter:blur(30px);
   animation:breathe 11s ease-in-out infinite;
 }
-@keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes breathe{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
 .hero-inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin:0 auto;display:flex;flex-direction:column;flex:1;justify-content:center}
 .eyebrow{
   display:flex;align-items:center;gap:16px;font-size:11px;letter-spacing:.32em;
@@ -304,7 +314,7 @@ footer{padding:clamp(58px,9vh,96px) var(--gutter) 40px;border-top:1px solid var(
 .f-bot{max-width:var(--maxw);margin:56px auto 0;padding-top:26px;border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:12px;color:#5E5B55}
 
 /* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0ms)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0ms)}
 .rv.in{opacity:1;transform:none}
 .mask{display:block;overflow:hidden}
 .mask > span{display:block;transform:translateY(105%);transition:transform 1.15s var(--ease);transition-delay:var(--d,0ms)}
@@ -392,9 +402,8 @@ section[id],#top{scroll-margin-top:96px}
    это постоянная перерисовка во весь экран; размытие фона шапки
    на мобильных тормозит сильнее всего */
 @media (hover:none),(max-width:860px){
-  .grain{opacity:.04}
+  .grain{animation:none;opacity:.04}
   .hero-glow{animation:none}
-  .portrait-frame img{will-change:auto}
 }
 @media (prefers-reduced-motion:reduce){
   .grain{animation:none}
@@ -446,7 +455,7 @@ p,blockquote{text-wrap:pretty}
   right:0;top:50%;margin-top:calc(var(--seal) / -2);
   width:var(--seal);height:var(--seal);
 }
-.hero-seal .seal{opacity:0;transform:scale(.9) rotate(-10deg);animation:sealIn 1.3s var(--ease) .3s both}
+.hero-seal .seal{opacity:0;transform:scale(.9) rotate(-10deg);animation:sealIn 1.8s var(--ease) .6s both}
 @keyframes sealIn{to{opacity:1;transform:none}}
 .hero-lower>:not(.hero-seal){position:relative;z-index:1}
 /* на узких экранах — крупный водяной знак за текстом, частично за краем */
@@ -533,22 +542,27 @@ h1.hero-name .sur{
    Обложка проявляется сама, с первого кадра. Раньше её появление
    запускал скрипт — первые мгновения экран был почти пуст, пока он
    скачивался. Движение то же, порядок тот же, только плотнее:
-   всё на месте примерно за 1,4 с вместо 2,8.
+   хореография прежняя.
    ===================================================================== */
-@keyframes heroUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes heroUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes maskUp{from{transform:translateY(105%)}to{transform:none}}
-.hero .rv{transition:none;animation:heroUp .8s var(--ease) var(--hd,0ms) both}
-.hero .mask > span{transition:none;animation:maskUp .9s var(--ease) var(--hd,0ms) both}
-.hero .mask > .d-80{--hd:60ms}
-.hero .hero-rule{--hd:280ms}
-.hero .hero-lede{--hd:330ms}
-.hero .hero-actions{--hd:400ms}
-.hero .hm.d-760{--hd:470ms}
-.hero .hm.d-840{--hd:520ms}
-.hero .hm.d-920{--hd:570ms}
-.hero .scroll-cue{--hd:620ms}
+.hero .rv{transition:none;animation:heroUp 1.05s var(--ease) var(--d,0ms) both}
+.hero .mask > span{transition:none;animation:maskUp 1.15s var(--ease) var(--d,0ms) both}
 /* у золотой строки две анимации: выезд из-под маски и латунный блик */
-.hero h1.hero-name .sur{animation:maskUp .9s var(--ease) 150ms both,sheen 10s cubic-bezier(.5,0,.25,1) 2.4s infinite}
+.hero h1.hero-name .sur{animation:maskUp 1.15s var(--ease) 200ms both,sheen 10s cubic-bezier(.5,0,.25,1) 2.6s infinite}
 @media (prefers-reduced-motion:reduce){
   .hero .rv,.hero .mask > span,.hero h1.hero-name .sur{animation:none;opacity:1;transform:none}
 }
+
+/* стекло под закреплённой шапкой — на компьютерах; на телефонах
+   плотный фон, там размытие при прокрутке действительно тормозит */
+@media (hover:hover) and (pointer:fine){
+  .hdr.stuck{background:rgba(8,8,10,.78);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+}
+
+/* вечные анимации обложки спят, когда её не видно: глазу незаметно,
+   а браузеру при прокрутке остального сайта меньше работы */
+.hero.hero-off .hero-glow,
+.hero.hero-off .seal-ring,
+.hero.hero-off h1.hero-name .sur,
+.hero.hero-off .scroll-cue i::after{animation-play-state:paused}
